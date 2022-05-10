@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- doccure/checkout.html  30 Nov 2019 04:12:16 GMT -->
+
+<head>
+	<meta charset="utf-8">
+	<title>Doccure</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+	<!-- Favicons -->
+	<link href="../public/assets/img/favicon.png" rel="icon">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="../public/assets/css/bootstrap.min.css">
+
+	<!-- Fontawesome CSS -->
+	<link rel="stylesheet" href="../public/assets/plugins/fontawesome/css/fontawesome.min.css">
+	<link rel="stylesheet" href="../public/assets/plugins/fontawesome/css/all.min.css">
+
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="../public/assets/css/style.css">
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+			<script src="assets/js/html5shiv.min.js"></script>
+			<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body>
+
+	<!-- Main Wrapper -->
+	<div class="main-wrapper">
+
+		<!-- Header -->
+		{{>header}}
+		<!-- /Header -->
+
+		<!-- Breadcrumb -->
+		<div class="breadcrumb-bar">
+			<div class="container-fluid">
+				<div class="row align-items-center">
+					<div class="col-md-12 col-12">
+						<nav aria-label="breadcrumb" class="page-breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="/">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Checkout</li>
+							</ol>
+						</nav>
+						<h2 class="breadcrumb-title">Checkout</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Breadcrumb -->
+
+		<!-- Page Content -->
+		<div class="content">
+			<div class="container">
+
+				<div class="row">
+					<div class="col-md-7 col-lg-8">
+						<div class="card">
+							<div class="card-body">
+								{{!-- <div class="exist-customer">Existing Customer? <a href="#">Click
+										here to login</a></div> --}}
+								<!-- Checkout Form -->
+								<form action="/checkout/{{data._id}}" method="post" class=" mt-5">
+									<input type="hidden" name="date" value="{{data2.date}}">
+									<input type="hidden" name="time" value="{{data2.time}}">
+									<input type="hidden" name="fee" value="{{data2.fee}}">
+									<input type="hidden" name="orderId" value="{{order_id.id}}">
+									<input type="hidden" name="doctorName" value="{{data.name}}">
+									<input type="hidden" name="appointmentFor" value="{{data.specialization}}">
+									<script src="https://checkout.razorpay.com/v1/checkout.js"
+										data-key="rzp_test_O1cfhf7n3DQiga" data-amount="{{data2.fee}}" data-currency="INR"
+										data-order_id="{{order_id.id}}" data-buttontext="Pay with Razorpay"
+										data-name="Acme Corp"
+										data-description="A Wild Sheep Chase is the third novel by Japanese author Haruki Murakami"
+										data-image="https://example.com/your_logo.jpg" data-prefill.name="Gaurav Kumar"
+										data-prefill.email="gaurav.kumar@example.com"
+										data-theme.color="#F37254"></script>									
+
+									<div class="payment-widget">
+										<h4 class="card-title">Personal Information</h4>
+										<div class="row">
+											<div class="col-md-6 col-sm-12">
+												<div class="form-group card-label">
+													<label> Name</label>
+													<input class="form-control" value="{{user.name}}" name="name" type="text">
+												</div>
+											</div>
+
+											<div class="col-md-6 col-sm-12">
+												<div class="form-group card-label">
+													<label>Age</label>
+													<input class="form-control" value="{{user.age}}" name="age" type="number">
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-12">
+												<div class="form-group card-label">
+													<label>Email</label>
+													<input class="form-control" value="{{user.email}}" name="email" type="email">
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-12">
+												<div class="form-group card-label">
+													<label>Phone</label>
+													<input class="form-control" value="{{user.phone}}" name="phone" type="text">
+												</div>
+											</div>
+
+										</div>
+
+
+										<!-- Terms Accept -->
+										<div class="terms-accept">
+											<div class="custom-checkbox">
+												<input type="checkbox" id="terms_accept">
+												<label for="terms_accept">I have read and accept <a href="#">Terms &amp;
+														Conditions</a></label>
+											</div>
+										</div>
+										<!-- /Terms Accept -->
+
+										<!-- Submit Section -->
+										<div class="submit-section mt-4">
+										<button type="submit" class="btn btn-primary submit-btn razorpay-payment-button">Pay with razorpay</button>
+									</div>
+										<!-- /Submit Section -->
+										<style>
+											input[type="submit"]{
+												display: none;
+											}
+										</style>
+
+									</div>
+								</form>
+								<!-- /Checkout Form -->
+
+							</div>
+						</div>
+
+					</div>
+
+					<div class="col-md-5 col-lg-4 theiaStickySidebar">
+
+						<!-- Booking Summary -->
+						<div class="card booking-card">
+							<div class="card-header">
+								<h4 class="card-title">Booking Summary</h4>
+							</div>
+							<div class="card-body">
+
+								<!-- Booking Doctor Info -->
+								<div class="booking-doc-info">
+									<a href="doctor-profile.html" class="booking-doc-img">
+										<img src="../public/assets/uploads/{{data.image}}" alt="User Image">
+									</a>
+									<div class="booking-info">
+										<h4><a href="doctor-profile.html">{{data.name}}</a></h4>
+										<div class="rating">
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star filled"></i>
+											<i class="fas fa-star"></i>
+											<span class="d-inline-block average-rating">35</span>
+										</div>
+										<div class="clinic-details">
+											<p class="doc-location"><i class="fas fa-map-marker-alt"></i>
+												{{data.contactDetails.state}}, {{data.contactDetails.country}}</p>
+										</div>
+									</div>
+								</div>
+								<!-- Booking Doctor Info -->
+
+								<div class="booking-summary">
+									<div class="booking-item-wrap">
+										<ul class="booking-date">
+											<li>Date <span> {{data2.date}} </span></li>
+											<li>Time <span> {{data2.time}} </span></li>
+										</ul>
+										<ul class="booking-fee">
+											<li>Consulting Fee <span>&#8377; {{data.price}} </span></li>
+											{{!-- <li>Booking Fee <span>$10</span></li>
+											<li>Video Call <span>$50</span></li> --}}
+										</ul>
+										<div class="booking-total">
+											<ul class="booking-total-list">
+												<li>
+													<span>Total</span>
+													<span class="total-cost">&#8377; {{data.price}}</span>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /Booking Summary -->
+
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		<!-- /Page Content -->
+
+		<!-- Footer -->
+		{{>footer}}
+		<!-- /Footer -->
+
+	</div>
+	<!-- /Main Wrapper -->
+
+	<!-- jQuery -->
+	<script src="../public/assets/js/jquery.min.js"></script>
+
+	<!-- Bootstrap Core JS -->
+	<script src="../public/assets/js/popper.min.js"></script>
+	<script src="../public/assets/js/bootstrap.min.js"></script>
+
+	<!-- Sticky Sidebar JS -->
+	<script src="../public/assets/plugins/theia-sticky-sidebar/ResizeSensor.js"></script>
+	<script src="../public/assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
+
+	<!-- Custom JS -->
+	<script src="../public/assets/js/script.js"></script>
+
+
+
+</body>
+
+</html>
