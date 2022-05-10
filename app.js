@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const app = express()
 const path = require("path");
@@ -11,14 +12,13 @@ const adminRouter = require("./router/admin-routing")
 const docterRouter = require("./router/docter-routing")
 const User = require("./db/user"); 
 
-require('dotenv').config()
 // console.log(process.env.SECRET_KEY)
 
 app.use(router);
 app.use(adminRouter);
 app.use(docterRouter) 
 
-const port = process.env.port || 8000;
+const port = process.env.PORT || 8000;
 
 app.use("/public", express.static(path.join(__dirname, "public")))
 app.set("view engine", "hbs");
